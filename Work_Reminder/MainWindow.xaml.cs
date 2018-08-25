@@ -23,6 +23,8 @@ namespace Work_Reminder
         public MainWindow()
         {
             InitializeComponent();
+            Topmost = true;
+            InitApp();
         }
 
         private System.Windows.Forms.NotifyIcon _notifyIcon;
@@ -35,12 +37,41 @@ namespace Work_Reminder
                 Icon = Properties.Resources._3553339,
                 Visible = true
             };
-            _notifyIcon.DoubleClick += _notifyIcon_DoubleClick;
+            _notifyIcon.DoubleClick += Notify_ShowClick;
+
+            _notifyIcon.ContextMenuStrip = new System.Windows.Forms.ContextMenuStrip();
+            _notifyIcon.ContextMenuStrip.Items.Add("Show").Click += Notify_ShowClick;
+            _notifyIcon.ContextMenuStrip.Items.Add("Exit").Click += Notify_ExitClick;
         }
 
-        private void _notifyIcon_DoubleClick(object sender, EventArgs e)
+        private void Notify_ExitClick(object sender, EventArgs e)
         {
-            
+            _notifyIcon.Dispose();
+            Close();
+            Application.Current.Shutdown();
+        }
+
+        private void Notify_ShowClick(object sender, EventArgs e)
+        {
+            if (!IsVisible)
+                Show();
+            else
+            {
+                if (WindowState == WindowState.Minimized)
+                    WindowState = WindowState.Normal;
+                Activate();
+            }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            e.Cancel = true;
+            WindowState = WindowState.Minimized;
+        }
+
+        private void Window_StateChanged(object sender, EventArgs e)
+        {
+            Hide();
         }
     }
 }
