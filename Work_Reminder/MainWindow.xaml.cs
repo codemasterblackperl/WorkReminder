@@ -23,7 +23,6 @@ namespace Work_Reminder
         public MainWindow()
         {
             InitializeComponent();
-            Topmost = true;
             InitApp();
         }
 
@@ -53,14 +52,8 @@ namespace Work_Reminder
 
         private void Notify_ShowClick(object sender, EventArgs e)
         {
-            if (!IsVisible)
-                Show();
-            else
-            {
-                if (WindowState == WindowState.Minimized)
-                    WindowState = WindowState.Normal;
-                Activate();
-            }
+            ShowInTaskbar = true;
+            WindowState = WindowState.Normal;
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -71,7 +64,9 @@ namespace Work_Reminder
 
         private void Window_StateChanged(object sender, EventArgs e)
         {
-            Hide();
+            var win = (MainWindow)sender;
+            if (win.WindowState != WindowState.Normal)
+                ShowInTaskbar = false;
         }
     }
 }
