@@ -5,9 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Work_Reminder"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" Closing="Window_Closing" StateChanged="Window_StateChanged" 
-        ResizeMode="CanMinimize" Topmost="True">
-    <Grid>
-        
-    </Grid>
+        Title="Work Tracker" Height="147.525" Width="415.366" Closing="Window_Closing" StateChanged="Window_StateChanged" 
+        ResizeMode="CanMinimize" Topmost="True" WindowStartupLocation="CenterScreen" WindowStyle="None">
+    <Border BorderBrush="#FF878787" BorderThickness="2">
+        <Grid>
+            <Button x:Name="BtnStartWork" Content="Start Work" HorizontalAlignment="Center" Height="47" VerticalAlignment="Top" Width="184" Margin="0,10,0,0" Click="BtnStartWork_Click"/>
+            <Label x:Name="LblTime" Content="{Binding CurrentTime}" Margin="10,77,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center"/>
+            <Label x:Name="LblMessage" Content="Get your ass up and do some walking" Margin="10,77,10,10" FontWeight="Bold" FontSize="20" HorizontalContentAlignment="Center"/>
+        </Grid>
+    </Border>
 </Window>
